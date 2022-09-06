@@ -64,7 +64,8 @@ Data mining (**DM**) is the next step; instead of letting the user look for usef
 This section describes the different entities involved in SQL Server: instances, databases, schemas and database objects.
 
 ### SQL Server Instances
-
+A SQL Server instance is an installation of a SQL Server database engine/service. You can install multiple instances of SQL Server on the same computer.
+Each instance is completely independent of the others in terms of security, the data that it manages, and in all other respects.
 
 
 
