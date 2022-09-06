@@ -4,8 +4,7 @@
 SQL stands for *Structured Query Language*. It was designed to query and manage data in relational database management system (RDBMS). This type of database is based on two mathematical branches: **set theory** and **predicate logic**.
 Unlike many programming languages, SQL requires you to specify *what* you want to get and not *how* to get it. The task of the RDBMS is to figure out the physical mechanics of processing your request.
 
-#### SQL has several categories..
-..of statements:
+SQL has several categories of statements:
 - **DDL** (Data Definition Language) -> object definition (CREATE, ALTER, DROP)
 - **DML** (Data Manipulation Language) -> querying and modify data (SELECT, INSERT, UPDATE, DELETE, MERGE)
 - **DCL** (Data Control Langauge) -> deals with permissions (GRANT, REVOKE)
