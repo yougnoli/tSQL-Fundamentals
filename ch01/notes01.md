@@ -20,3 +20,41 @@ A predicate is an expression or a property is either true or false. In the relat
 In set theory you can use predicates to define sets. This is useful because to return certain elements from a set I don't need to write the elements I need, just the right predicate that allows me to retrieve those elements. 
 
 ### Relational Model
+The relational model is a semantic model for representing data and is based on set theory and predicate logic. The goal of the relational model is to enable consistent representation of data with minimal or no redundancy and without sacrificing completeness, and to define data integrity as part of the model. An RDBMS is supposed to implement the relational model and provide the means to store, manage, enforce the integrity of, and query data.
+
+The common belief that the term *relational* stands for relationship between tables is incorrect. **Relational** actually concerns to the mathematical term *relation*. **Relation** is a representation of a set in set theory. In the relational model, a **relation** is a set of related information, with the implementation in the database being a table. When you design a data model for your database, you represent all data with relation (tables). You start by identifying propositions that you will need to represent in your database. A **proposition** is an assertion that must be true or false. For example the statement "customer Alessio Tugnoli was born on November 28, 1994 in Italy" is a proposition. If thi proposition is evaluated as true, it will manifest itself a s a row in the table of Customers. A false proposition simply won't manifest itself.
+
+The next step is to formalize proposition. You do this by taking out the actual data and defining the structure: creating predicates out of propositions. The heading of a relation include a set of **attributes**. In the relational model attributes are unordered. An attribute is identify by an **attribute name** and a **domain name** (type). For example the heading of the Customer table might consist of the following attributes (attribute name - domain name): customerid - integer, firstname - character string, lastname - character string, birthdate - date, country - character string. A domain name is the possible/valid set of values for an attribute. For example the domain INT (integer) is the set of all inegers in the range -2,147,483,684 to 2,147,483,647. A domain is the simplest form of a predicate in our database because it restricts the attributes values that are allowed. For example, the database would not accept a proposition where an employee birthdate is November 45, 1994 or even a 'abcdef'.
+
+### Missing Values
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
