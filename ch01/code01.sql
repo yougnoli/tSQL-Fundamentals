@@ -23,11 +23,11 @@ if object_id('dbo.employees', 'U') is not null
 go
 
 create table dbo.employees (
-	empid		int				not null
+	empid		int			not null
 	,firstname	varchar(30)		not null
 	,lastname	varchar(30)		not null
 	,hiredate	date			not null
-	,mgrid		int				null
+	,mgrid		int			null
 	,ssn		varchar(20)		not null
 	,salary		money			not null
 )
@@ -62,11 +62,11 @@ if object_id('dbo.orders', 'U') is not null
 go
 
 create table dbo.orders (
-	orderid		int			not null
-	,empid		int			not null
-	,custid		varchar(10)	not null
-	,orderts	datetime	not null
-	,qty		int			not null
+	orderid		int				not null
+	,empid		int				not null
+	,custid		varchar(10)			not null
+	,orderts	datetime			not null
+	,qty		int				not null
 	,constraint pk_orders primary key (orderid)
 )
 ;
