@@ -97,7 +97,7 @@ One of the greatest benefits in the relational model is that data integrity is a
 A primary key contraint enforces uniqueness of rows and also disallow NULLs in the constraint attributes. Each table can have only one primary key. With a primary key in place you can be assured that all rows of the table will be unique. When creating a primary key, SQL Server creates a unique index behind the scenes. A **unique index** is a mechanism to enforce uniqueness and speed up queries by avoiding unnecessary *full table scan*.
 
 ## Unique Constraints
-
+The unique constraint ensures that all values in a column are different. Both the unique and primary key constraints provide a guarantee for uniqueness for a column or set of columns. Also, a unique constraint is not restricted to columns defined as NOT NULL. A primary key constraint automatically has a unique constraint. However, you can have many unique constraints per table, but only one primary key constraint per table.
 
 ## Foreign Key Constraints
 Enforces referencial integrity. This constraint points to a set of candidate key (primary key or unique constraint) attributes in what's called the *referenced* table. 
