@@ -65,7 +65,21 @@ This section describes the different entities involved in SQL Server: instances,
 
 ### SQL Server Instances
 A SQL Server instance is an installation of a SQL Server database engine/service. You can install multiple instances of SQL Server on the same computer.
-Each instance is completely independent of the others in terms of security, the data that it manages, and in all other respects.
+Each instance is completely independent of the others in terms of security, the data that it manages, and in all other respects. One of the instances on the computer must be named as *default instance*, while all others must be *'name' istance*. There are various reasons why you want to install multiple instances os SQL Server on the same computer:
+- Save costs for the support department of the organisation to be able to test and reproduce errors that users face in production environment.
+- Perform different versions of the product.
+- ecc
+
+### Databases
+A database is a container of objects such as tables, views, stored procedure ecc. Each instance of SQL Server can contain multiple databases. When you install SQL Server, the setup program creates several **system databases** that hold system data and serve internal purposes:
+- **master**: holds instance-wide metadata information, server configuration, information about all databases in the instance, and initialization information.
+- **Resource**: holds all system objects. When you query metadata information in a database, this information appears to be local to the database but in practice it resides in the Resource database.
+- **model**: is used as a template for new databases. Every new database that you create is initially created as a copy of model. So if you want certain database properties to be configured in a certain way in all new databases, you need
+to create those objects and configure those properties in the model database.
+- **tempdb**: where SQL Server stores temporary data. SQL Server allows you to create temporary tables for your own use, and the physical location of those temporary tables is tempdb. Note that this database is destroyed and recreated as a copy of the model every time you restart the instance of SQL Server. For this reason,
+when I need to create objects for test purposes and I don’t want the objects to remain in the database, I usually create them in tempdb. I know that even if I forget to clear those objects, they will be automatically cleared after restart.
+- **msdb**: is where a service called SQL Server Agent stores its data. SQL Server Agent is in charge of automation, which includes entities such as jobs, schedules, and alerts.
+
 
 
 
