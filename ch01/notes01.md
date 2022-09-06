@@ -36,6 +36,36 @@ SQL implements a three-valued predicate logic by supporting the NULL mark to sig
 One of the greatest benefits of the relational model is having **data integrity**. Integrity is achieved through rules, or *constraints*, that are defined in the data model and enforced by the RDBMS. The simplest methods of enforcing integrity are the **attribute type** and its **NULLability** (wether it supports or doesn't support NULLs), which enforce domain integrity.
 Other examples of constraints include **candidate keys** and **foreign keys**. A candidate key is a key defined on one or more attributes preventing **more then one occurrance** of the same tuple (row) in a relation. A predicate based on a candidate key can uniquely identify a row. You can define multiple candidate keys in a relation. One of the candidate keys is arbitrarily chosen as the **primary key**, and is used as the preferred way to identify a row. All other candidate keys are also known as **alternate keys**. A foreign key is defined on one or more attributes of a relation and references a candidate key in another relation. This constraint restricts the values in the **referencing relation’s foreign key attributes** to the values that appear in the **referenced relation’s candidate key attributes**. For example, only the values present in the department ID (primary key) attribute of a relation, can enter the department ID (foreign key) attribute of another relation.
 
+## The Data Life Cycle
+This section describes the different environments that data can reside in and the characteristics of both the data and the environment in each stage in the data life cycle.
+
+### OnLine Transactional Processing - OLTP
+Data is initially entered in an OLTP system. The focus of an OLTP is **data entry** (INSERT, UPDATE, DELETE) and not reporting. In a normalized environment each table represents a single entity and redundancy is at minimum. When you need to modify a fact you need to modify it in only one place. An OLTP environment is not suitable for reporting purposes because a normalized model usually involves many tables with complex relationships and poorly performing queries.
+
+### Data Warehouse DW
+DW is an environment designed for data **retrieval/reporting** purposes. For an entire organisation is called Data Warehouse; when serving a specific department is called Data Mart. The model ha intentional redundacy, which allows fewer tables and simpler relationships. The simplest design for a Data Warehouse is a **star schema** which includes several dimension tables and a fact table. Each dimension table represents a subject by which data is analyzed. For this reason each dimension is implemented as a single table with redundant data. For example a product dimension (DimProduct) could be implemented as a single table and not as three  normalized tables: Products, ProductSubCategories, ProductCategories. If you normalize a dimesion table, resulting in multiple tables representing the dimension you get what's known as *snow flake dimension*. A schema that contains snowflake dimension is known as **snow flake schema**.
+The fact table holds the facts and measures such as quantity and value for each relevant combination of dimension keys.
+
+The process that pulls data from source systems (OLTP and others), manipulates it, and loads it into the data warehouse is called **Extract Transform and Load**, or **ETL**. SQL Server provides a tool called *Microsoft SQL Server Integration Services (SSIS)* to handle ETL needs.
+
+### OnLine Analytical Processing - OLAP
+OnLine Analytical Processing (OLAP) systems support dynamic, online analysis of aggregated data. This type of work is not suitable for an OLTP or DW system. Online dynamic analysis of aggregated data usually involves frequent requests for different levels of aggregations, which
+require slicing and dicing the data. Each such request might end up being very expensive if it needs to scan and aggregate large amounts of data, and chances are the response time will not be satisfactory.
+
+To handle such needs you can **pre-calculate** different levels of aggregations:
+  - Time dimension: yearly, monthly, daily
+  - Product dimension: category, subcategory, product
+  - ecc
+When you pre-calculate aggregates, requests for aggregated data can be satisfied more quickly. Microsoft SQL Server Analysis Service allows to calculate and store different levels of aggregations from the relational data warehouse and storing them in optimized multidimensional structures known as **cubes**. **SSAS** is a separate service/engine from the SQL Server service.
+
+### Data Mining
+Data mining (**DM**) is the next step; instead of letting the user look for useful information in the sea of data, data mining models can do this for the user. That is, data mining algorithms helps to identify trends, figure out which products are purchased together, predict customer choices based on given parameters and so on.
+
+## SQL Server Architectures
+This section describes the different entities involved in SQL Server: instances, databases, schemas and database objects.
+
+### SQL Server Instances
+
 
 
 
