@@ -80,6 +80,34 @@ to create those objects and configure those properties in the model database.
 when I need to create objects for test purposes and I don’t want the objects to remain in the database, I usually create them in tempdb. I know that even if I forget to clear those objects, they will be automatically cleared after restart.
 - **msdb**: is where a service called SQL Server Agent stores its data. SQL Server Agent is in charge of automation, which includes entities such as jobs, schedules, and alerts.
 
+When creating a database you can define the *collation*: a property that will determine language support, case sensitivity, and sort order for character data in that database.
+
+To run tSQL code against a database, a client application need to connect a SQL Server instance and be in the context of use of the relevant database.
+
+The database is made of data and transaction log files. Each database must have at least one data file and at least one log file. The **data files** hold object data, the **log files** hold information that SQL Server needs to mantain transactions. SQL Server can write on multiple data files in parallel, but can only write to one log file at a time.
+Data files are organized in logical groups called **filegroups**. The object data created (a table or an index..) will be spread across the files that belong to the target filegroup. A database must have at least one filegroup named **PRIMARY** containing the primary data file and the database's system catalog.
+
+### Schemas and Objects
+A database contains objects, but more precisly a database contains schemas and schemas contain objects. Schemas is a container of objects such as tables, views, stored procedures and others. You can control permissions at a schema level, granting a user SELECT permissions on a schema, allowing the user to query data from all objects in the schema. Schema is also a namespace: is used as a prefix to the object name.
+
+### Defining Data Integrity
+One of the greatest benefits in the relational model is that data integrity is an integral part of it.
+
+## Primary Key Constraints
+A primary key contraint enforces uniqueness of rows and also disallow NULLs in the constraint attributes. Each table can have only one primary key. With a primary key in place you can be assured that all rows of the table will be unique. When creating a primary key, SQL Server creates a unique index behind the scenes. A **unique index** is a mechanism to enforce uniqueness and speed up queries by avoiding unnecessary *full table scan*.
+
+## Unique Constraints
+
+
+## Foreign Key Constraints
+Enforces referencial integrity. This constraint points to a set of candidate key (primary key or unique constraint) attributes in what's called the *referenced* table. 
+
+## Check Constraints
+Allows you to define a predicate that a row must meet to enter the table or to be modified. For example a check constraint that ensures that the salary column will support only positive values: salary > 0. An attempt to insert or update a row with a nonpositive salary value will be rejected by the RDBMS (hence the predicate evaluates the value to FALSE). The modification will be accepted when the predicate evaluates to either TRUE or UNKNOWN (hence salary NULL will be accepted).
+When adding CHECK and FOREIGN KEY constraints, you can specify an option called WITH NOCHECK: telling the RDBMS that you want it to bypass constraint checking for existing data.
+
+## Default Constraints
+Is associated with a particular attribute. It is an expression that is used as the default value when an explicit value is not provided for that attribute whe you insert a row. The foreign key’s purpose is to restrict the domain of values allowed in the foreign key columns to those that exist in the referenced columns.
 
 
 
