@@ -5,9 +5,9 @@ select
 	,custid
 	,empid
 from 
-  sales.orders
+  	sales.orders
 where 
-  year(orderdate) = 2021 and month(orderdate) = 6
+  	year(orderdate) = 2021 and month(orderdate) = 6
 ;
 go
 
