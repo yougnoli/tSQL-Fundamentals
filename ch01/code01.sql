@@ -133,7 +133,17 @@ go
 
 -- UNIQUE CONSTRAINT
 -- UNIQUE CONSTRAINT
-
+-- check of the table:
+select * from dbo.employees
+;
+go
+-- inserting a row with correct empid (I don't want violate primary key constraint), but not unique ssn:
+insert into dbo.employees values
+(5, 'alessio', 'marconi', '20220101', 1, 'abc123', 20000) 
+;
+go
+-- error:
+-- Violation of UNIQUE KEY constraint 'unq_employees_ssn'. Cannot insert duplicate key in object 'dbo.employees'. The duplicate key value is (abc123).
 
 -- FOREIGN KEY
 -- FOREIGN KEY
