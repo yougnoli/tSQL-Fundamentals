@@ -60,13 +60,27 @@ You can optionally assign your own name to the target attribute by using the AS 
 
 Remember that the SELECT clause is processed after the FROM, WHERE, GROUP BY, and HAVING clauses. This means that **aliases assigned to expressions in the SELECT clause do not exist as far as clauses that are processed before the SELECT clause are concerned**.
  
-If the tables you query have keys and qualify as sets, a SELECT query against the tables can still return a result with duplicate rows. The term result set is often used to describe the output of a SELECT query, but a result set doesn’t necessarily qualify as a set in the mathematical sense. SQL provides the means to guarantee uniqueness in the result of a SELECT statement in the form of a DISTINCT clause that removes duplicate rows,
+If the tables you query have keys and qualify as sets, a SELECT query against the tables can still return a result with duplicate rows. The term result set is often used to describe the output of a SELECT query, but a result set doesn’t necessarily qualify as a set in the mathematical sense. SQL provides the means to guarantee uniqueness in the result of a SELECT statement in the form of a DISTINCT clause that removes duplicate rows.
+ 
+SQL supports the use of an asterisk (*) in the SELECT list to request all attributes from the queried tables instead of listing them explicitly, but this is bad programming practice (in most cases). It is recommended that you explicitly specify the list of attributes that you need even if you need all of the attributes from the queried table.
+ 
+Note: within the SELECT clause you are still not allowed to refer to a column alias that was created in the same SELECT clause.
 
 ### The ORDER BY Clause
+The ORDER BY clause allows you to sort the rows in the output for presentation purposes. In terms of logical query processing, ORDER BY is the very last clause to be processed.
 
+One of the most important points to understand about SQL is that a table has no guaranteed order, because a table is supposed to represent a set (or multiset if it has duplicates), and a set has no order. 
 
+Note: the ORDER BY phase is in fact the only phase in which you can refer to column aliases created in the SELECT phase, because it is the only phase that is processed after the SELECT phase. 
+
+If you want sorting in descendin order you have to specify DESC after the expression, for ascending order (which is default) you can eventually specify ASC.  
+ 
 ### The TOP Option
+Allows you to limit the number of rows that your query returns. In terms of logical processing the TOP option is processed as part of the SELECT phase, right after the DISTINCT clause (if one exists). 
 
+You can use the TOP option with the PERCENT *keyword*, in which case SQL Server calculates the number of rows to return based on the percentage of the number passed after the TOP and before the PERCENTAGE, rounded up.
+
+In case of ties, SQL Server chooses rows based on whichever row it physically happens to access first. To have all the rows that have the same values (for example the same date), in the presence of a top that could cut some out, it is possible to add the WITH TIES option which shows all the same values even if the top should have limit the return.
 
 ### The OVER Clause
 
