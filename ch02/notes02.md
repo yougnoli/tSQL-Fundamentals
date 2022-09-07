@@ -87,10 +87,22 @@ The OVER clause exposes a window of rows to certain kinds of calculations. Aggre
 An OVER clause with empty parentheses exposes all rows to the calculation. Note that the OVER clause is allowed only in the SELECT and ORDER BY phases. If you want to restrict or partition the rows, you can use the PARTITION BY clause inside the OVER clause. In this way you can calculate on portions of the set, without having to group and always returning the same initial number of rows.
 
 The OVER clause is also supported with four **ranking functions**:
- - ROW_NUMBER
- - RANK
- - DENSE_RANK
- - NTILE
+ - ROW_NUMBER: assigns incrementing sequential integers to the rows in the result set of a query, based on logical order that is specifi ed in the ORDER BY subclause of the OVER clause. It must produce **unique values** even when there are ties in the ordering values.
+ - RANK: produce the **same** ranking value in all rows that have the same logical ordering value. It resumes the count by skipping the number that did not count.
+ - DENSE_RANK: produce the **same** ranking value in all rows that have the same logical ordering value. It resumes the count from the number it had left.
+ - NTILE: allows you to associate the rows in the result with tiles (equally sized groups of rows) by assigning a tile number to each row. You specify as input to the function how many tiles you are after, and in the OVER clause you specify the logical ordering.
+ 
+To put it all together, the following list presents the logical order in which all clauses discussed so far are processed:
+ - FROM
+ - WHERE
+ - GROUP BY
+ - HAVING
+ - SELECT
+   - OVER
+   - DISTINCT
+   - TOP
+ - ORDER BY
+ 
 ## Predicates and Operators
 
 
