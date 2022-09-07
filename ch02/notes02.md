@@ -11,6 +11,7 @@ In SQL things are different. Even though the SELECT clause appears first in the 
 - HAVING
 - SELECT
 - ORDER BY
+
 Here is wat the query does in a readable manner following the logical processing:
 - Queries the rows *from* a table;
 - Filters only rows *where* a certain logical predicate is TRUE;
