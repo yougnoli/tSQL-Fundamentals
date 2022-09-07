@@ -102,9 +102,3 @@ To put it all together, the following list presents the logical order in which a
    - DISTINCT
    - TOP
  - ORDER BY
- 
-## Predicates and Operators
-
-
-
-## CASE Expressions
