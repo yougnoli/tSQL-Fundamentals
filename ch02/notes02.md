@@ -51,10 +51,16 @@ function** such as COUNT, SUM, AVG, MIN, or MAX.
 Note that all aggregate functions ignore NULLs with one exception: COUNT(*).
 
 ### The HAVING Clause
-
+With the HAVING clause you can specify a predicate/logical expression to **filter groups** as opposed to filtering individual rows, which happens in the WHERE clause. Groups for which the logical expression evaluates FALSE or UNKNOWN are filtered out. 
+In the HAVING clause (who take the rows after being grouped from the GROUP BY) you can **refer to aggregate functions** in the logical expression.
 
 ### The SELECT Clause
+Is where you specify the attributes (columns) that you want to return in the result table of the query.
+You can optionally assign your own name to the target attribute by using the AS clause -> <expression> AS <alias>.
 
+Remember that the SELECT clause is processed after the FROM, WHERE, GROUP BY, and HAVING clauses. This means that **aliases assigned to expressions in the SELECT clause do not exist as far as clauses that are processed before the SELECT clause are concerned**.
+ 
+If the tables you query have keys and qualify as sets, a SELECT query against the tables can still return a result with duplicate rows. The term result set is often used to describe the output of a SELECT query, but a result set doesn’t necessarily qualify as a set in the mathematical sense. SQL provides the means to guarantee uniqueness in the result of a SELECT statement in the form of a DISTINCT clause that removes duplicate rows,
 
 ### The ORDER BY Clause
 
