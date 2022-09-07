@@ -83,9 +83,14 @@ You can use the TOP option with the PERCENT *keyword*, in which case SQL Server 
 In case of ties, SQL Server chooses rows based on whichever row it physically happens to access first. To have all the rows that have the same values (for example the same date), in the presence of a top that could cut some out, it is possible to add the WITH TIES option which shows all the same values even if the top should have limit the return.
 
 ### The OVER Clause
+The OVER clause exposes a window of rows to certain kinds of calculations. Aggregate and ranking functions, for example, are the types of calculations that support the OVER clause. Because the OVER clause exposes a window of rows to those functions, they are known as window functions. An aggregate window function operates against a set of values in a window of rows that you expose to it using the OVER clause, and not in the context of a GROUP BY query. Therefore, you don’t have to group the data.
+An OVER clause with empty parentheses exposes all rows to the calculation. Note that the OVER clause is allowed only in the SELECT and ORDER BY phases. If you want to restrict or partition the rows, you can use the PARTITION BY clause inside the OVER clause. In this way you can calculate on portions of the set, without having to group and always returning the same initial number of rows.
 
-
-
+The OVER clause is also supported with four **ranking functions**:
+ - ROW_NUMBER
+ - RANK
+ - DENSE_RANK
+ - NTILE
 ## Predicates and Operators
 
 
