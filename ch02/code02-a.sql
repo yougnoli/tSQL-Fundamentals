@@ -341,3 +341,117 @@ order by
 	orderdate desc
 ;
 go
+
+-- The OVER Clause
+-- The OVER Clause
+-- exposing all rows to a calculation (thanks to the aggregate function SUM())
+select
+	orderid
+	,custid
+	,sum(val) over() as total_value
+from	
+	sales.OrderValues
+;
+go
+-- exposing all rows to a calculation, partioned by a certain attribute. When the attribute changes, the calculation starts over.
+select
+	orderid
+	,custid
+	,sum(val) over() as total_value
+	,sum(val) over(partition by custid) as total_value
+from	
+	sales.OrderValues
+;
+go
+-- I can combine in a single row two OVER clauses:
+select
+	orderid
+	,custid
+	,sum(val) over(partition by custid) as total_value_per_custid
+	,sum(val) over() as total_value
+	,val / sum(val) over(partition by custid) * 100 as pct_custid
+from	
+	sales.OrderValues
+;
+go
+
+-- ranking functions
+-- remember: Windowed functions can only appear in the SELECT or ORDER BY clauses
+select
+	orderid
+	,custid
+	,val
+	,row_number() over(order by val) as row_num
+	,rank() over(order by val) as [rank]
+	,dense_rank() over(order by val) as [dense_rank]
+	,ntile(100) over(order by val) as [ntile]
+from
+	sales.OrderValues
+-- where row_number() over(order by val) > 10 ERROR!!
+order by val
+;
+go
+
+--ranking functions also support a PARTITION BY clause in the OVER clause
+select
+	orderid
+	,custid
+	,val
+	,row_number() over(partition by custid order by val) as row_num
+	from
+		sales.OrderValues
+	order by
+		custid,val
+	;
+	go
+
+/*
+■ FROM
+■ WHERE
+■ GROUP BY
+■ HAVING
+■ SELECT
+	❏ OVER
+	❏ DISTINCT
+	❏ TOP
+■ ORDER BY
+
+Why it matters that the DISTINCT clause is processed after window calculations
+that appear in the SELECT clause are processed, and not before?
+*/
+select 
+	count(val) as num_of_rows
+from 
+	sales.OrderValues
+;
+go -- 830 rows 
+
+select distinct		
+	val
+from 
+	sales.OrderValues
+;
+go -- 795 disitnct val
+
+select distinct
+	val
+	,row_number() over(order by val) as row_num
+from 
+	sales.OrderValues
+;
+go -- 830 rows => because the DISTINCT is processed after the ROW NUMBER which create unique rows to the set
+/*
+You can consider it a best practice not to specify both DISTINCT and ROW_NUMBER in the same SELECT clause as the DISTINCT
+clause has no effect in such a case.
+*/
+
+-- In order to have distinct values with numeration:
+select
+	val
+	,row_number() over(order by val) as row_num
+from 
+	sales.OrderValues
+group by
+	val
+;
+go -- 795 rows
