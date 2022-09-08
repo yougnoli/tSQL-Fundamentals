@@ -315,3 +315,29 @@ order by
 go --> 9 rows as result
 -- note: 830 (rows) * 0.01 = 8.3 -> rounded up = 9
 select ceiling(830 * 0.01) as top_1_percent
+
+-- this query gives me the top 5 rows order by orderdate
+select top 5
+	orderid
+	,orderdate
+	,custid
+	,empid
+from
+	sales.orders
+order by 
+	orderdate desc
+;
+go
+-- if you want to see possible dates that come out of the top (5) still the same to the one on the top (5):
+-- now I have 8 rows, but the top is 5
+select top 5 with ties
+	orderid
+	,orderdate
+	,custid
+	,empid
+from
+	sales.orders
+order by 
+	orderdate desc
+;
+go
