@@ -100,5 +100,10 @@
 -- 55 rows
 
 -- esercizio 20
+-- mostra i paesi che hanno un differenziale medio del freight in negativo rispetto l'anno precedente
+-- sales.customers, sales.orders
+-- 17 rows
+
+-- esercizio 21
 -- mostra la stringa '! ITINIF IZICRESE' al contrario, con una funzione adeguata -> cercala su internet!
 -- 1 row
