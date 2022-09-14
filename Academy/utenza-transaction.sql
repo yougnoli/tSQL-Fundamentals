@@ -7,8 +7,7 @@ CREAZIONE UTENZA
 
 Il database da utilizzare è il db USER -> dove creiamo lo USER
 Il database MASTER è il database che contiene le login -> dove creiamo la LOGIN (ma qua creeremo anche la USER, perchè ci è più comodo:
-																				 in questo modo sono sicuro di essere connesso all'intera istanza dove
-																				 ci sono tutti i databases.)
+in questo modo sono sicuro di essere connesso all'intera istanza dove ci sono tutti i databases.)
 Poi a questo utente dovremo dargli i diritti per fare determinate cose.
 
 */
