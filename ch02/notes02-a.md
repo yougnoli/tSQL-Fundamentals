@@ -102,3 +102,15 @@ To put it all together, the following list presents the logical order in which a
    - DISTINCT
    - TOP
  - ORDER BY
+ 
+ and this is the order in which all clauses are written:
+ - SELECT
+   - DISTINCT
+   - TOP
+   - OVER
+ - FROM
+ - WHERE
+ - GROUP BY
+ - HAVING
+ - ORDER BY
+ 
