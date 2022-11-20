@@ -12,7 +12,7 @@ poi c'è il ROOT.
 
 						***********************************
 						*                                 *
-						*		  CLUSTERED INDEX         *
+						*         CLUSTERED INDEX         *
 						*                                 *
 						***********************************
 Esempio: la rubrica telefonica, dove ogni lettera è una sezione dove ci sono i nomi e il numero di telefono corrispondente
@@ -25,7 +25,7 @@ ma è possibile che quell'unico indice CLUSTERED sia definito su più campi (COM
 
 						***********************************
 						*                                 *
-						*		NON CLUSTERED INDEX       *
+						*	NON CLUSTERED INDEX       *
 						*                                 *
 						***********************************
 Esempio: un libro, dove l'indice del libro è dove ci sono le informazioni per andare alle pagine dei capitoli.
